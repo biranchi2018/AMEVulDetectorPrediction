@@ -3,5 +3,6 @@ Running App:
 =============
 
 docker build -t detector .
-docker run -it -v "$(pwd)":"$(pwd)" detector
-docker run -it -v "$(pwd)":"$(pwd)" bash
+
+docker run -it -v logs:/myfiles detector
+docker run -it -v logs:/myfiles bash

@@ -726,6 +726,7 @@ def generate_graph(filepath):
 
 if __name__ == "__main__":
     test_contract = "../data_example/reentrancy/source_code/simple_dao.sol"
+    #test_contract = "Crowdfunding.sol"
     node_feature, edge_feature = generate_graph(test_contract)
     node_feature = sorted(node_feature, key=lambda x: (x[0]))
     edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
