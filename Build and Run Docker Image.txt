@@ -2,7 +2,7 @@
 Running App:
 =============
 
-docker build -t detector .
+docker build -t amevuldetector .
 
-docker run -it -v logs:/myfiles detector
-docker run -it -v logs:/myfiles bash
+docker run -it -v logs:/logs amevuldetector
+docker run -it -v logs:/logs bash

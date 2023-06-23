@@ -1,16 +1,6 @@
-FROM python:3.6
+FROM python:3.6-slim
 
 MAINTAINER biranchi125@gmail.com
-
-
-
-#COPY . /app
-#RUN python -m pip install -r /app/requirements.txt 
-
-# CMD ["python", "/app/GNNSCModel.py"]
-#CMD ["sh", "/app/train2.sh"]
-
-
 
 COPY . .
 RUN python -m pip install -r requirements.txt 
