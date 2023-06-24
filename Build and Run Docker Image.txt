@@ -4,5 +4,12 @@ Running App:
 
 docker build -t amevuldetector .
 
-docker run -it -v logs:/logs amevuldetector
-docker run -it -v logs:/logs bash
+docker run -it -v "$(pwd)/logs":/logs amevuldetector
+docker run -it -v "$(pwd)/logs":/logs bash
+
+
+Type of Vulnerability Detection:
+=================================
+
+reentrancy (RE)
+

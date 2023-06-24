@@ -71,6 +71,11 @@ def main():
 
     model.train()  # training
     model.test()  # testing
+    
+    #-------- Save the model ----------------------------
+    model_path = f"/logs/AMEVulDetector_{args.model}.h5"
+    model.model.save(model_path)
+    print(f'Model saved to path : {model_path}')
 
 
 if __name__ == "__main__":

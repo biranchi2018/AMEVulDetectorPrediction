@@ -84,5 +84,25 @@ def get_graph_feature():
 if __name__ == "__main__":
     pattern_train, pattern_test, pattern_experts_train, pattern_experts_test = get_pattern_feature()
     graph_train, graph_test, graph_experts_train, graph_experts_test = get_graph_feature()
+    print("-" * 50)
+    print(f"pattern_train.shape : {np.array(pattern_train).shape}")
+    print(f"pattern_test.shape : {np.array(pattern_test).shape}")
+
+    # pattern_train.shape : (1338, 3, 250)
+    # pattern_test.shape : (333, 3, 250)
+
+    print(f"pattern_train[:2] : {pattern_train[:2]}")
+    print(f"pattern_test[:2] : {pattern_test[:2]}")
+
+    print("-" * 50)
+    print(f"graph_train.shape : {np.array(graph_train).shape}")
+    print(f"graph_test.shape : {np.array(graph_test).shape}")
+
+    # graph_train.shape : (1338, 1, 250)
+    # graph_test.shape : (333, 1, 250)
+
+    print(f"graph_train[:2] : {graph_train[:2]}")
+    print(f"graph_test[:2] : {graph_test[:2]}")
+    
     print()
 
