@@ -73,3 +73,14 @@ If any question, please email to messi.qp711@gmail.com.
 2. Qian P, Liu Z, He Q, et al. Towards automated reentrancy detection for smart contracts based on sequential models. 2020. [ReChecker](https://github.com/Messi-Q/ReChecker)
 
 
+### Steps for making predictions on a trained model
+1. Create the model
+	1. Checkout the Repo https://github.com/biranchi2018/AMEVulDetector
+	2. Build and Run the Docker image, the model will be created and saved inside the /logs folder  
+	3. Copy the model file into this Repo and place it inside the /logs folder
+2. Generate the Pattern feature 
+	1. Place the smart contract solidity .sol file inside the source_code folder
+	2. Run the generate_patterns.py script to generate the pattern_feature
+3. Run predictions on the model
+	1. Run the AMEVulDetectorPrediction.py script to generate the predictions
+	 
