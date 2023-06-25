@@ -3,7 +3,7 @@ import re
 import torch
 import numpy as np
 from pattern_extractor_example.MLP_layer import MLP
-
+from pattern_extractor_example.util import check_folder_exists
 """
 Here is the method for extracting security patterns of infinite loop.
 """
@@ -292,6 +292,70 @@ def extract_feature_with_fc(outputPathFC, pattern1, pattern2, pattern3, pattern4
     np.savetxt(outputPathFC, pattern_final, fmt="%.6f")
 
 
+
+def generate_IF(filename, inputFileDir, outputfeatureDir, outputfeatureFCDir, outputlabelDir):
+    label = None    
+    check_folder_exists(outputfeatureDir)
+    check_folder_exists(outputfeatureFCDir)
+    check_folder_exists(outputlabelDir)
+
+    #dirs = os.listdir(inputFileDir)
+    #for file in dirs:
+    
+    file = filename
+
+    pattern1 = [1, 0, 0, 0]
+    pattern2 = [0, 1, 0, 0]
+    pattern3 = [0, 0, 1, 0]
+    pattern4 = [0, 0, 0, 1]
+
+    #print(file)
+    inputFilePath = inputFileDir + file
+    print(f'inputFilePath 1 : {inputFilePath}')
+    
+    name = file.split(".")[0]
+    pattern_list = extract_pattern(inputFilePath)
+    
+    print(f"len(pattern_list) : {len(pattern_list)}")
+    print(f"pattern_list : {pattern_list}")
+    
+    if len(pattern_list) == 4:
+        if sum(pattern_list) == 0:
+            label = 0
+        else:
+            label = 1
+    else:
+        print("The extracted patterns are error!")
+        return
+
+    pattern1.append(pattern_list[0])
+    pattern2.append(pattern_list[1])
+    pattern3.append(pattern_list[2])
+    pattern4.append(pattern_list[3])
+
+    outputPathFC = outputfeatureFCDir + name + ".txt"
+    extract_feature_with_fc(outputPathFC, pattern1, pattern2, pattern3, pattern4)
+
+    pattern1 = np.array(pattern1)
+    pattern1 = np.array(np.pad(pattern1, (0, 195), 'constant'))
+    pattern2 = np.array(pattern2)
+    pattern2 = np.array(np.pad(pattern2, (0, 195), 'constant'))
+    pattern3 = np.array(pattern3)
+    pattern3 = np.array(np.pad(pattern3, (0, 195), 'constant'))
+    pattern4 = np.array(pattern4)
+    pattern4 = np.array(np.pad(pattern4, (0, 195), 'constant'))
+    print(len(pattern4))
+
+    pattern_final = np.array([pattern1, pattern2, pattern3, pattern4])
+    outputPath = outputfeatureDir + name + ".txt"
+    np.savetxt(outputPath, pattern_final, fmt="%.6f")
+
+    outputlabelPath = outputlabelDir + file
+    f_outlabel = open(outputlabelPath, 'a')
+    f_outlabel.write(str(label))    
+
+
+'''
 if __name__ == "__main__":
     # pattern1 = [1, 0, 0, 0]
     # pattern2 = [0, 1, 0, 0]
@@ -319,6 +383,12 @@ if __name__ == "__main__":
     outputfeatureDir = "../pattern_feature/feature_zeropadding/loops/"
     outputfeatureFCDir = "../pattern_feature/feature_FNN/loops/"
     outputlabelDir = "../pattern_feature/label_by_extractor/loops/"
+    
+    check_folder_exists(outputfeatureDir)
+    check_folder_exists(outputfeatureFCDir)
+    check_folder_exists(outputlabelDir)
+
+    
     dirs = os.listdir(inputFileDir)
     for file in dirs:
         pattern1 = [1, 0, 0, 0]
@@ -363,3 +433,4 @@ if __name__ == "__main__":
         outputlabelPath = outputlabelDir + file
         f_outlabel = open(outputlabelPath, 'a')
         f_outlabel.write(str(label))
+'''

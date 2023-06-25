@@ -2,9 +2,9 @@
 Running App:
 =============
 
-docker build -t amevuldetector .
+docker build -t amevuldetectorpred .
 
-docker run -it -v "$(pwd)/logs":/logs amevuldetector
+docker run -it -v "$(pwd)/logs":/logs amevuldetectorpred
 docker run -it -v "$(pwd)/logs":/logs bash
 
 
